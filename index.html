@@ -2,71 +2,125 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Table Talk</title>
 <meta name="description" content="Fun, family-friendly conversation starters for any table.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
+<meta name="theme-color" content="#EFE4DA">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='30' fill='%23161616'/><text x='50' y='68' font-size='54' text-anchor='middle'>💬</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
+  /* ---- Table Talk theme: warm neutrals + soft pastel category colors ---- */
   :root {
-    --bg: #fbf6ef; --card: #ffffff; --ink: #3b2a1f; --muted: #7a6656;
-    --accent: #c2571a; --accent-ink: #fff; --chip: #f1e4d3; --chip-on: #8a3b12; --line: #e7d8c5;
+    --bg: #EFE4DA;            /* warm beige page */
+    --surface: #FAF8F6;       /* off-white panels */
+    --surface-2: #F1ECE7;     /* quiet fills (round buttons, inputs) */
+    --ink: #161616;           /* near-black text + primary button */
+    --ink-soft: #3A3633;
+    --muted: #7B746E;
+    --line: #E4DAD0;
+    --on-primary: #FFFFFF;
+    --shadow: 0 18px 40px rgba(90, 60, 40, .12);
+    --radius-xl: 32px; --radius-lg: 24px; --radius-pill: 999px;
+    /* category pastels (cards stay light in both modes, so text on them is always --cat-ink) */
+    --lavender: #C9CCF7; --butter: #EBDB8F; --mint: #CFE3DC; --blush: #EAD9CF;
+    --rose: #F4C9CF; --sage: #C3CBA4; --sky: #B3C9EE; --cat-ink: #161616;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #1f1813; --card: #2b221b; --ink: #f4e9dc; --muted: #bfa892;
-      --accent: #e0752f; --accent-ink: #1f1813; --chip: #3a2e25; --chip-on: #e0752f; --line: #43362b; }
+    :root:not([data-theme="light"]) {
+      --bg: #171413; --surface: #221E1C; --surface-2: #2D2826; --ink: #F4EFEA; --ink-soft: #D9D1CA;
+      --muted: #A89F97; --line: #37302C; --on-primary: #161616; --shadow: 0 18px 40px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #171413; --surface: #221E1C; --surface-2: #2D2826; --ink: #F4EFEA; --ink-soft: #D9D1CA;
+    --muted: #A89F97; --line: #37302C; --on-primary: #161616; --shadow: 0 18px 40px rgba(0,0,0,.35);
   }
   * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
   body { margin: 0; background: var(--bg); color: var(--ink);
-    font-family: Georgia, "Iowan Old Style", "Palatino Linotype", serif; min-height: 100vh;
-    display: flex; flex-direction: column; align-items: center; padding: 24px 16px 40px; }
-  header { text-align: center; max-width: 640px; }
-  h1 { font-size: clamp(1.8rem, 5vw, 2.6rem); margin: 0 0 6px; }
-  .sub { color: var(--muted); margin: 0 0 20px; font-size: 1.05rem; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; max-width: 680px; margin-bottom: 20px; }
-  .chip { border: 1px solid var(--line); background: var(--chip); color: var(--ink); border-radius: 999px;
-    padding: 8px 14px; font: inherit; font-size: .95rem; cursor: pointer; }
-  .chip[aria-pressed="true"] { background: var(--chip-on); color: #fff; border-color: var(--chip-on); }
-  .card { background: var(--card); border: 1px solid var(--line); border-radius: 20px; width: 100%; max-width: 640px;
-    min-height: 260px; padding: 32px 28px; display: flex; flex-direction: column; justify-content: center;
-    box-shadow: 0 10px 30px rgba(80, 40, 10, .08); text-align: center; }
-  .cat { text-transform: uppercase; letter-spacing: .12em; font-size: .8rem; color: var(--accent); margin-bottom: 14px;
-    font-family: system-ui, sans-serif; font-weight: 600; }
-  .q { font-size: clamp(1.4rem, 4.2vw, 2rem); line-height: 1.35; margin: 0; }
+    font-family: "Urbanist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+    min-height: 100vh; min-height: 100dvh; display: flex; justify-content: center;
+    padding: max(20px, env(safe-area-inset-top)) 16px max(28px, env(safe-area-inset-bottom)); }
+  .app { width: 100%; max-width: 560px; display: flex; flex-direction: column; gap: 18px; }
+
+  header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; padding: 4px 4px 0; }
+  .mark { width: 44px; height: 44px; border-radius: 14px; background: var(--ink); color: var(--on-primary);
+    display: grid; place-items: center; font-size: 22px; flex: none; }
+  .eyebrow { font-size: .85rem; color: var(--muted); margin: 18px 0 4px; font-weight: 500; letter-spacing: .01em; }
+  h1 { font-size: clamp(2.1rem, 8vw, 2.8rem); line-height: 1.05; margin: 0; font-weight: 300; letter-spacing: -.02em; }
+  h1 b { font-weight: 700; }
+  .sub { color: var(--muted); margin: 8px 0 0; font-size: 1rem; line-height: 1.45; max-width: 34ch; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { --dot: var(--line); display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line);
+    background: var(--surface); color: var(--ink); border-radius: var(--radius-pill); padding: 9px 14px 9px 11px;
+    font: inherit; font-size: .92rem; font-weight: 500; cursor: pointer; transition: background .15s, color .15s; }
+  .chip::before { content: ""; width: 12px; height: 12px; border-radius: 50%; background: var(--dot); flex: none; }
+  .chip[aria-pressed="true"] { background: var(--ink); color: var(--on-primary); border-color: var(--ink); }
+
+  .card { --cat: var(--surface); position: relative; overflow: hidden; background: var(--cat); color: var(--cat-ink);
+    border-radius: var(--radius-xl); min-height: 300px; padding: 26px 24px 28px; display: flex; flex-direction: column;
+    box-shadow: var(--shadow); cursor: pointer; transition: background .35s ease; }
+  .card.empty { color: var(--ink); }
+  .card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .cat { font-size: .82rem; font-weight: 600; letter-spacing: .02em; background: rgba(255,255,255,.55);
+    color: var(--cat-ink); padding: 6px 12px; border-radius: var(--radius-pill); }
+  .card.empty .cat { background: var(--surface-2); color: var(--ink); }
+  .badge { width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,.55); display: grid; place-items: center; font-size: 18px; }
+  .card.empty .badge { background: var(--surface-2); }
+  .q { font-size: clamp(1.55rem, 6vw, 2.1rem); line-height: 1.22; margin: auto 0 0; padding-top: 28px; font-weight: 500;
+    letter-spacing: -.01em; max-width: 20ch; position: relative; }
+  .art { position: absolute; right: -14px; bottom: -22px; font-size: 128px; opacity: .16; pointer-events: none; line-height: 1; }
   .fade { animation: fade .35s ease; }
   @keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-  .actions { display: flex; gap: 10px; margin-top: 22px; flex-wrap: wrap; justify-content: center; }
-  button.primary { background: var(--accent); color: var(--accent-ink); border: 0; border-radius: 14px;
-    padding: 14px 28px; font: inherit; font-size: 1.15rem; cursor: pointer; font-weight: bold; }
-  button.ghost { background: transparent; color: var(--ink); border: 1px solid var(--line); border-radius: 14px;
-    padding: 14px 18px; font: inherit; font-size: 1rem; cursor: pointer; }
-  button:disabled { opacity: .45; cursor: default; }
-  button:focus-visible, .chip:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-  .meta { color: var(--muted); font-size: .9rem; margin-top: 14px; font-family: system-ui, sans-serif; }
-  footer { margin-top: auto; padding-top: 32px; color: var(--muted); font-size: .85rem; text-align: center; }
+
+  .dock { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--surface);
+    border-radius: var(--radius-pill); padding: 8px; box-shadow: var(--shadow); }
+  .round { width: 54px; height: 54px; border-radius: 50%; border: 0; background: var(--surface-2); color: var(--ink);
+    font: inherit; font-size: 1.3rem; cursor: pointer; display: grid; place-items: center; flex: none; }
+  .primary { flex: 1; height: 54px; border: 0; border-radius: var(--radius-pill); background: var(--ink); color: var(--on-primary);
+    font: inherit; font-size: 1.08rem; font-weight: 600; cursor: pointer; }
+  button:disabled { opacity: .35; cursor: default; }
+  button:active:not(:disabled) { transform: scale(.97); }
+  button:focus-visible, .card:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .below { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 0 8px; }
+  .meta { color: var(--muted); font-size: .9rem; }
+  .link { background: none; border: 0; color: var(--ink-soft); font: inherit; font-weight: 600; font-size: .92rem;
+    cursor: pointer; padding: 6px 4px; text-decoration: underline; text-underline-offset: 3px; }
+  footer { color: var(--muted); font-size: .82rem; text-align: center; line-height: 1.5; margin-top: 6px; }
+  @media (prefers-reduced-motion: reduce) { .fade { animation: none; } .card { transition: none; } }
 </style>
 </head>
 <body>
-<header>
-  <h1>💬 Table Talk</h1>
-  <p class="sub">Fun, family-friendly questions for any meal or get-together. Pass the phone, read it out loud, everyone answers!</p>
-</header>
+<div class="app">
+  <header>
+    <div>
+      <div class="mark" aria-hidden="true">💬</div>
+      <p class="eyebrow">Conversation starters</p>
+      <h1>Let's get <b>talking</b></h1>
+      <p class="sub">Pass the phone, read it out loud, and everyone answers.</p>
+    </div>
+  </header>
 
-<div class="chips" id="chips" role="group" aria-label="Question categories"></div>
+  <div class="chips" id="chips" role="group" aria-label="Question categories"></div>
 
-<main class="card" aria-live="polite">
-  <div class="cat" id="cat">Ready when you are</div>
-  <p class="q" id="q">Tap “✨ New question” to start the conversation.</p>
-</main>
+  <main class="card empty" tabindex="0" aria-live="polite" aria-label="Question card, tap for a new question">
+    <div class="card-top"><span class="cat" id="cat">Ready when you are</span><span class="badge" id="badge" aria-hidden="true">✨</span></div>
+    <p class="q" id="q">Tap “✨ New question” to start the conversation.</p>
+    <span class="art" id="art" aria-hidden="true"></span>
+  </main>
 
-<div class="actions">
-  <button class="ghost" id="back" aria-label="Previous question" disabled>← Back</button>
-  <button class="primary" id="gen">✨ New question</button>
-  <button class="ghost" id="next" aria-label="Skip to next question">Skip →</button>
-  <button class="ghost" id="copy">Copy</button>
+  <div class="dock">
+    <button class="round" id="back" aria-label="Back to previous question" disabled>←</button>
+    <button class="primary" id="gen">✨ New question</button>
+    <button class="round" id="next" aria-label="Skip to next question">→</button>
+  </div>
+  <div class="below"><span class="meta" id="meta"></span><button class="link" id="copy">Copy</button></div>
+
+  <footer>✨ makes up a brand-new question · → skips to the next one from the list<br>Keyboard: space = new · → = skip · ← = back</footer>
 </div>
-<div class="meta" id="meta"></div>
-
-<footer>✨ New question makes up a brand-new question every time. Skip pulls from the classic list.<br>Keys: space = new · → = skip · ← = back</footer>
 
 <script>
 const QUESTIONS = {
@@ -226,6 +280,13 @@ let deck = [], history = [], pos = -1, roundStart = 0;
 const $ = id => document.getElementById(id);
 const chips = $("chips");
 
+// Each category's color + picture (colors are theme tokens above)
+const STYLE = {
+  "Silly & Fun": ["--lavender", "🤪"], "Food & Feast": ["--butter", "🍕"], "Would You Rather": ["--mint", "🤔"],
+  "Family Stories": ["--blush", "🏡"], "Thankful": ["--rose", "💛"], "Holidays": ["--sage", "🎉"], "Kids' Corner": ["--sky", "🧸"],
+};
+const styleOf = c => STYLE[c] || ["--surface", "💬"];
+
 function renderChips() {
   chips.innerHTML = "";
   const all = document.createElement("button");
@@ -235,7 +296,7 @@ function renderChips() {
   chips.appendChild(all);
   for (const c of cats) {
     const b = document.createElement("button");
-    b.className = "chip"; b.textContent = c;
+    b.className = "chip"; b.textContent = c; b.style.setProperty("--dot", `var(${styleOf(c)[0]})`);
     b.setAttribute("aria-pressed", active.size !== cats.length && active.has(c));
     b.onclick = () => {
       if (active.size === cats.length) active = new Set([c]);
@@ -259,6 +320,9 @@ function show(item) {
   const qEl = $("q"), cEl = $("cat");
   qEl.classList.remove("fade"); void qEl.offsetWidth; qEl.classList.add("fade");
   cEl.textContent = item.gen ? `${item.c} · ✨ new` : item.c; qEl.textContent = item.q; updateMeta();
+  const [color, pic] = styleOf(item.c), card = document.querySelector(".card");
+  card.classList.remove("empty"); card.style.setProperty("--cat", `var(${color})`);
+  $("art").textContent = pic; $("badge").textContent = item.gen ? "✨" : pic;
   $("back").disabled = pos <= 0;
 }
 
@@ -267,7 +331,8 @@ function next() {
   if (!deck.length) {
     roundStart = history.length; pos = history.length; $("back").disabled = pos <= 0;
     rebuild();
-    $("cat").textContent = "You've seen them all! 🎉"; $("q").textContent = "Shuffling a fresh round — tap next to keep going.";
+    $("cat").textContent = "You've seen them all! 🎉"; $("q").textContent = "Shuffling a fresh round. Tap → to keep going.";
+    const card = document.querySelector(".card"); card.classList.add("empty"); card.style.removeProperty("--cat"); $("art").textContent = ""; $("badge").textContent = "🎉";
     return;
   }
   const item = deck.pop(); history.push(item); pos = history.length - 1; show(item);
@@ -303,6 +368,7 @@ document.addEventListener("keydown", e => {
   if (e.code === "Space") { e.preventDefault(); gen(); }
   if (e.key === "ArrowRight") next();
   if (e.key === "ArrowLeft") back();
+  if (e.key === "Enter" && e.target.classList.contains("card")) gen();
 });
 
 rebuild();
