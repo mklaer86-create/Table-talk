@@ -16,5 +16,9 @@ Everything is in `index.html`:
 - `G` holds the word lists the generator mixes (add your family's favorite foods!)
 - `TEMPLATES` holds the question patterns, each tagged with the categories it fits
 
+## Theme
+Built with the **Soft Pastel Kit** design system (saved in Michelle's claude.ai account): https://claude.ai/artifact/LJYJcd8XvojvPyRq5k43Cz
+The theme colors are the tokens at the top of the `<style>` block in `index.html`.
+
 ## Tests
 `node test.js` (needs Playwright) clicks every button and category in a real browser.
