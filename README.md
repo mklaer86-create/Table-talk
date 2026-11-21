@@ -1,6 +1,6 @@
-# Table Talk 🦃
+# Table Talk 💬
 
-A lightweight, family-friendly icebreaker app for the dinner table. It's one HTML file with no sign-ups, ads or tracking.
+A lightweight, family-friendly conversation-starter app for any table: family dinners, holidays, parties, road trips. It's one HTML file with no sign-ups, ads or tracking.
 
 **Live:** https://mklaer86-create.github.io/Table-talk/
 

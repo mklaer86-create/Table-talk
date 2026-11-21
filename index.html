@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Thanksgiving Table Talk</title>
-<meta name="description" content="Family-friendly icebreaker questions for the Thanksgiving table.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🦃</text></svg>">
+<title>Table Talk</title>
+<meta name="description" content="Fun, family-friendly conversation starters for any table.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💬</text></svg>">
 <style>
   :root {
     --bg: #fbf6ef; --card: #ffffff; --ink: #3b2a1f; --muted: #7a6656;
@@ -47,8 +47,8 @@
 </head>
 <body>
 <header>
-  <h1>🦃 Thanksgiving Table Talk</h1>
-  <p class="sub">Clean, family-friendly questions to get to know each other's families. Pass the phone, read it out loud, everyone answers!</p>
+  <h1>💬 Table Talk</h1>
+  <p class="sub">Fun, family-friendly questions for any meal or get-together. Pass the phone, read it out loud, everyone answers!</p>
 </header>
 
 <div class="chips" id="chips" role="group" aria-label="Question categories"></div>
@@ -79,25 +79,25 @@ const QUESTIONS = {
     "If you could only eat one color of food forever, which color?",
     "What's the most useless talent you have?",
     "If you had a theme song that played when you walked in, what would it be?",
-    "What would you name a pet turkey?",
+    "What would you name a pet goldfish?",
     "What's your go-to dance move?",
     "If you could swap lives with a cartoon character for a day, who?",
     "What's the funniest word you know?"
   ],
   "Food & Feast": [
-    "What's your must-have Thanksgiving dish?",
-    "Stuffing or mashed potatoes — you can only pick one!",
-    "Pumpkin pie, apple pie, or pecan pie?",
+    "What's a dish you could eat every single week?",
+    "Pizza or tacos — you can only pick one!",
+    "Cake, pie, or ice cream?",
     "What's the best leftover sandwich you've ever made?",
-    "If you could add one totally new dish to Thanksgiving, what would it be?",
-    "Gravy on everything — yes or no?",
+    "If you could invent a brand-new dish, what would it be?",
+    "Ketchup on everything — yes or no?",
     "What's your favorite holiday smell?",
     "Who in your family makes the best dessert?",
     "What's the most unusual food your family eats on holidays?",
-    "Cranberry sauce: can-shaped or homemade?"
+    "Breakfast for dinner: yes or no?"
   ],
   "Would You Rather": [
-    "Would you rather have Thanksgiving on a beach or in a snowy cabin?",
+    "Would you rather have dinner on a beach or in a snowy cabin?",
     "Would you rather only eat side dishes or only eat dessert?",
     "Would you rather talk to animals or speak every language?",
     "Would you rather have a pet dragon or a pet unicorn?",
@@ -126,13 +126,26 @@ const QUESTIONS = {
     "What's something you learned this year that you're glad you know?",
     "What's a place you're thankful you got to visit?"
   ],
+  "Holidays": [
+    "What's your must-have Thanksgiving dish?",
+    "Stuffing or mashed potatoes — you can only pick one!",
+    "Pumpkin pie, apple pie, or pecan pie?",
+    "Would you rather have Thanksgiving on a beach or in a snowy cabin?",
+    "If a turkey could talk, what would it say?",
+    "What's your favorite holiday tradition?",
+    "What's the best present you've ever given someone?",
+    "What's your favorite holiday movie?",
+    "What's the best holiday decoration you've ever seen?",
+    "What's your dream birthday party?",
+    "What's one thing you want to try in the new year?"
+  ],
   "Kids' Corner": [
-    "If you were a Thanksgiving food, what would you be?",
+    "If you were a food, what would you be?",
     "What superpower would you want and why?",
     "What's the silliest joke you know?",
     "If you could invent a new holiday, what would it celebrate?",
     "What animal would you be for a day?",
-    "If a turkey could talk, what would it say?",
+    "If your pet could talk, what would it say?",
     "If your toys came to life, which one would you hang out with?",
     "If you could make one rule for the whole world, what would it be?"
   ]
@@ -143,7 +156,9 @@ const QUESTIONS = {
 const pick = a => a[Math.floor(Math.random() * a.length)];
 const two = a => shuffle([...a]).slice(0, 2);
 const G = {
-  food: ["pumpkin pie","mashed potatoes","cranberry sauce","stuffing","mac and cheese","sweet potato casserole","dinner rolls","green bean casserole","pecan pie","corn on the cob","gravy","whipped cream"],
+  food: ["pizza","tacos","mac and cheese","pancakes","spaghetti","ice cream","popcorn","mashed potatoes","chocolate cake","corn on the cob","french fries","whipped cream"],
+  holiday: ["Thanksgiving","the Fourth of July","Halloween","New Year's Eve","your birthday","Valentine's Day","the first day of summer","Christmas"],
+  feast: ["pumpkin pie","stuffing","cranberry sauce","sweet potato casserole","gravy","pecan pie","green bean casserole","dinner rolls"],
   animal: ["a turkey","a penguin","a golden retriever","a sloth","a raccoon","a llama","a squirrel","a cat","a giraffe","an owl","a dolphin","a hedgehog"],
   person: ["a pirate","an astronaut","a famous chef","a wizard","a superhero","a cowboy","a mermaid","a detective","a rock star","a game show host"],
   place: ["the moon","a pirate ship","a castle","a tropical island","a treehouse","the North Pole","a giant cruise ship","a log cabin","a submarine","a hot air balloon"],
@@ -160,22 +175,22 @@ const G = {
 };
 const TEMPLATES = [
   { cats: ["Food & Feast","Would You Rather"], make: () => `Would you rather eat ${pick(G.food)} every day for a year or never eat it again?` },
-  { cats: ["Food & Feast","Would You Rather"], make: () => { const [a, b] = two(G.food); return `Would you rather give up ${a} or ${b} at Thanksgiving?`; } },
+  { cats: ["Food & Feast","Would You Rather"], make: () => { const [a, b] = two(G.food); return `Would you rather give up ${a} or ${b} forever?`; } },
   { cats: ["Food & Feast"], make: () => `What's the best topping you could put on ${pick(G.food)}?` },
   { cats: ["Food & Feast","Kids' Corner"], make: () => `If ${pick(G.food)} were a person, what would its personality be like?` },
-  { cats: ["Food & Feast","Silly & Fun"], make: () => `If ${pick(G.person)} cooked Thanksgiving dinner, what would be on the menu?` },
+  { cats: ["Food & Feast","Silly & Fun"], make: () => `If ${pick(G.person)} cooked dinner tonight, what would be on the menu?` },
   { cats: ["Food & Feast","Family Stories"], make: () => `Who in your family makes the best ${pick(G.food)}?` },
   { cats: ["Would You Rather","Kids' Corner"], make: () => { const [a, b] = two(G.power); return `Would you rather be able to ${a} or ${b}?`; } },
   { cats: ["Would You Rather","Kids' Corner"], make: () => { const [a, b] = two(G.animal); return `Would you rather have ${a} or ${b} as a pet?`; } },
-  { cats: ["Would You Rather","Silly & Fun"], make: () => { const [a, b] = two(G.place); return `Would you rather spend Thanksgiving on ${a} or ${b}?`; } },
+  { cats: ["Would You Rather","Silly & Fun"], make: () => { const [a, b] = two(G.place); return `Would you rather spend a weekend on ${a} or ${b}?`; } },
   { cats: ["Would You Rather"], make: () => { const [a, b] = two(G.activity); return `Would you rather win ${a} or ${b}?`; } },
-  { cats: ["Silly & Fun"], make: () => `If you could have Thanksgiving dinner on ${pick(G.place)}, who would you invite?` },
-  { cats: ["Silly & Fun","Kids' Corner"], make: () => `If ${pick(G.animal)} came to Thanksgiving dinner, what would it bring?` },
+  { cats: ["Silly & Fun"], make: () => `If you could have dinner on ${pick(G.place)}, who would you invite?` },
+  { cats: ["Silly & Fun","Kids' Corner"], make: () => `If ${pick(G.animal)} came to dinner, what would it bring?` },
   { cats: ["Silly & Fun","Kids' Corner"], make: () => `If you were ${pick(G.person)} for a day, what would you do first?` },
-  { cats: ["Silly & Fun","Kids' Corner"], make: () => `If you could ${pick(G.power)} just for Thanksgiving, how would you use it?` },
+  { cats: ["Silly & Fun","Kids' Corner"], make: () => `If you could ${pick(G.power)} for just one day, how would you use it?` },
   { cats: ["Silly & Fun","Kids' Corner"], make: () => `If ${pick(G.thing)} could talk, what would it say about you?` },
   { cats: ["Silly & Fun"], make: () => `If our family had ${pick(G.activity)}, what would your secret strategy be?` },
-  { cats: ["Silly & Fun"], make: () => `What would Thanksgiving look like in ${pick(G.decade)}?` },
+  { cats: ["Silly & Fun"], make: () => `What would family dinner look like in ${pick(G.decade)}?` },
   { cats: ["Silly & Fun"], make: () => `What's one thing you'd bring on a trip to ${pick(G.place)}?` },
   { cats: ["Kids' Corner"], make: () => `If you were a ${pick(G.job)}, what would your best day at work look like?` },
   { cats: ["Kids' Corner","Thankful"], make: () => `If you were ${pick(G.animal)}, what would you be most thankful for?` },
@@ -188,6 +203,12 @@ const TEMPLATES = [
   { cats: ["Thankful"], make: () => `What's a ${pick(G.favorite)} from this year that made you happy?` },
   { cats: ["Thankful"], make: () => `Who at this table would you thank for ${pick(G.kindness)}?` },
   { cats: ["Thankful"], make: () => `If you lived in ${pick(G.decade)}, what would you miss most about today?` },
+  { cats: ["Holidays"], make: () => `What's your favorite way to celebrate ${pick(G.holiday)}?` },
+  { cats: ["Holidays","Silly & Fun"], make: () => `If ${pick(G.animal)} hosted ${pick(G.holiday)}, what would the party be like?` },
+  { cats: ["Holidays","Would You Rather"], make: () => { const [a, b] = two(G.holiday); return `Would you rather celebrate ${a} or ${b} twice a year?`; } },
+  { cats: ["Holidays","Food & Feast"], make: () => { const f = pick(G.feast); return `${f[0].toUpperCase()}${f.slice(1)}: love it or skip it?`; } },
+  { cats: ["Holidays","Thankful"], make: () => `What's a memory from ${pick(G.holiday)} you're thankful for?` },
+  { cats: ["Holidays","Kids' Corner"], make: () => `If you could invent a new tradition for ${pick(G.holiday)}, what would it be?` },
 ];
 function generate() {
   const pool = TEMPLATES.filter(t => t.cats.some(c => active.has(c)));

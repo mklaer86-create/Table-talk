@@ -1,4 +1,4 @@
-// Browser tests for Thanksgiving Table Talk. Run: node thanksgiving/test.js
+// Browser tests for Table Talk. Run: node test.js
 const { chromium } = require('playwright');
 const path = require('path');
 const URL = 'file://' + path.join(__dirname, 'index.html');
