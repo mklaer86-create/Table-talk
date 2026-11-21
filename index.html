@@ -25,7 +25,7 @@
     --radius-xl: 32px; --radius-lg: 24px; --radius-pill: 999px;
     /* category pastels (cards stay light in both modes, so text on them is always --cat-ink) */
     --lavender: #C9CCF7; --butter: #EBDB8F; --mint: #CFE3DC; --blush: #EAD9CF;
-    --rose: #F4C9CF; --sage: #C3CBA4; --sky: #B3C9EE; --cat-ink: #161616;
+    --rose: #F4C9CF; --sage: #C3CBA4; --sky: #B3C9EE; --peach: #F4D3B5; --aqua: #BDE2EA; --cat-ink: #161616;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
@@ -136,7 +136,15 @@ const QUESTIONS = {
     "What would you name a pet goldfish?",
     "What's your go-to dance move?",
     "If you could swap lives with a cartoon character for a day, who?",
-    "What's the funniest word you know?"
+    "What's the funniest word you know?",
+    "What's the most random thing you've ever found in your pocket?",
+    "If you were a cereal, what would you be called?",
+    "What's your best impression of someone famous? (Try it!)",
+    "If you had to wear one outfit forever, what would it be?",
+    "What emoji do you use the most?",
+    "If you could make any animal tiny enough to be a pet, which one?",
+    "What would your autobiography be called?",
+    "What's the silliest thing that ever made you laugh until you cried?"
   ],
   "Food & Feast": [
     "What's a dish you could eat every single week?",
@@ -148,7 +156,13 @@ const QUESTIONS = {
     "What's your favorite holiday smell?",
     "Who in your family makes the best dessert?",
     "What's the most unusual food your family eats on holidays?",
-    "Breakfast for dinner: yes or no?"
+    "Breakfast for dinner: yes or no?",
+    "What's the best thing you know how to cook?",
+    "If you opened a restaurant, what would be on the menu?",
+    "What food did you refuse to eat as a kid but love now?",
+    "What's the best snack for a road trip?",
+    "What's the fanciest meal you've ever had?",
+    "If you could only have one dessert for the rest of your life, what is it?"
   ],
   "Would You Rather": [
     "Would you rather have dinner on a beach or in a snowy cabin?",
@@ -160,7 +174,15 @@ const QUESTIONS = {
     "Would you rather be able to fly or be invisible?",
     "Would you rather always have to sing or always have to dance?",
     "Would you rather eat pie for breakfast or pancakes for dinner?",
-    "Would you rather have a robot chef or a robot that does dishes?"
+    "Would you rather have a robot chef or a robot that does dishes?",
+    "Would you rather visit the past or the future?",
+    "Would you rather live by the ocean or in the mountains?",
+    "Would you rather have a pet that talks or a pet that flies?",
+    "Would you rather be really good at singing or really good at dancing?",
+    "Would you rather explore a jungle or a desert?",
+    "Would you rather never have to sleep or never have to eat?",
+    "Would you rather be the funniest person in the room or the smartest?",
+    "Would you rather have a giant library or a giant game room?"
   ],
   "Family Stories": [
     "What's a funny story your family always tells at holidays?",
@@ -170,7 +192,13 @@ const QUESTIONS = {
     "What's one thing your family is known for?",
     "What did your grandparents do for fun as kids?",
     "What's a family tradition you love?",
-    "What's the funniest thing that ever happened at a family dinner?"
+    "What's the funniest thing that ever happened at a family dinner?",
+    "What's the first house or apartment you remember living in?",
+    "What's a saying someone in your family always repeats?",
+    "Who in your family is most like you?",
+    "What's a family recipe you hope never gets lost?",
+    "What was a typical Saturday like when you were growing up?",
+    "What's the best gift a family member ever gave you?"
   ],
   "Thankful": [
     "What's one small thing that made you smile this year?",
@@ -178,7 +206,11 @@ const QUESTIONS = {
     "What's a simple everyday thing you're grateful for?",
     "What's your favorite memory from this year?",
     "What's something you learned this year that you're glad you know?",
-    "What's a place you're thankful you got to visit?"
+    "What's a place you're thankful you got to visit?",
+    "Who always knows how to cheer you up?",
+    "What's a song that always puts you in a good mood?",
+    "What's a lesson someone taught you that you still use?",
+    "What's the best part of your everyday routine?"
   ],
   "Holidays": [
     "What's your must-have Thanksgiving dish?",
@@ -191,7 +223,11 @@ const QUESTIONS = {
     "What's your favorite holiday movie?",
     "What's the best holiday decoration you've ever seen?",
     "What's your dream birthday party?",
-    "What's one thing you want to try in the new year?"
+    "What's one thing you want to try in the new year?",
+    "What's the best homemade gift you've ever received?",
+    "Do you open presents on the eve or the morning?",
+    "What's your favorite holiday song?",
+    "What's a holiday food you only eat once a year?"
   ],
   "Kids' Corner": [
     "If you were a food, what would you be?",
@@ -201,7 +237,43 @@ const QUESTIONS = {
     "What animal would you be for a day?",
     "If your pet could talk, what would it say?",
     "If your toys came to life, which one would you hang out with?",
-    "If you could make one rule for the whole world, what would it be?"
+    "If you could make one rule for the whole world, what would it be?",
+    "If you could have any animal as a pet, what would it be?",
+    "What's the best thing that happened to you this week?",
+    "If you could be any cartoon character, who would you be?",
+    "What would you build if you had a million building blocks?",
+    "What's your favorite game to play at recess?",
+    "If you could fly anywhere, where would you go first?",
+    "What's something you're really good at?",
+    "If you could have any job for one day, what would it be?"
+  ],
+  "This or That": [
+    "Beach or mountains?",
+    "Cats or dogs?",
+    "Sunrise or sunset?",
+    "Books or movies?",
+    "Sweet or salty?",
+    "Early bird or night owl?",
+    "Summer or winter?",
+    "City or countryside?",
+    "Board games or video games?",
+    "Camping or a fancy hotel?",
+    "Coffee or hot chocolate?",
+    "Pancakes or waffles?",
+    "Texting or calling?",
+    "Roller coasters or the carousel?"
+  ],
+  "Dream Big": [
+    "If you could travel anywhere in the world tomorrow, where would you go?",
+    "What's one thing on your bucket list?",
+    "If you could learn any skill overnight, what would it be?",
+    "If you could meet anyone from history, who would it be?",
+    "What would your dream house have in it?",
+    "If you could invent something, what would it do?",
+    "If you could live in any book or movie world, which one?",
+    "What's a place you've always wanted to see in person?",
+    "If you could have any job in the world for a year, what would it be?",
+    "What's something you want to learn this year?"
   ]
 };
 
@@ -225,6 +297,9 @@ const G = {
   memory: ["a car ride","a holiday dinner","a family pet","a vacation","a birthday party","a snow day","a kitchen mishap","a camping trip","a wedding","a family game night"],
   favorite: ["song","meal","book","trip","surprise","movie","game","day","holiday tradition","outfit"],
   kindness: ["making you laugh","the best hugs","good advice","amazing cooking","always showing up","teaching you something","being patient with you"],
+  pair: [["beach","mountains"],["cats","dogs"],["sunrise","sunset"],["books","movies"],["sweet","salty"],["summer","winter"],["the city","the countryside"],["board games","video games"],["camping","a hotel"],["pancakes","waffles"],["pizza","burgers"],["rain","snow"],["comedies","cartoons"],["the zoo","the aquarium"]],
+  dest: ["Paris","Japan","a national park","Australia","Italy","Iceland","New York City","Hawaii","Egypt","the Grand Canyon","Antarctica","Brazil"],
+  talent: ["play the piano","speak Spanish","paint","surf","juggle","bake bread","do magic tricks","play the guitar","ice skate","build a robot"],
   season: ["fall","winter","spring","summer","the holidays","this past year"],
 };
 const TEMPLATES = [
@@ -263,6 +338,16 @@ const TEMPLATES = [
   { cats: ["Holidays","Food & Feast"], make: () => { const f = pick(G.feast); return `${f[0].toUpperCase()}${f.slice(1)}: love it or skip it?`; } },
   { cats: ["Holidays","Thankful"], make: () => `What's a memory from ${pick(G.holiday)} you're thankful for?` },
   { cats: ["Holidays","Kids' Corner"], make: () => `If you could invent a new tradition for ${pick(G.holiday)}, what would it be?` },
+  { cats: ["This or That"], make: () => { const [a, b] = pick(G.pair); return `${a[0].toUpperCase()}${a.slice(1)} or ${b}?`; } },
+  { cats: ["This or That"], make: () => { const [a, b] = pick(G.pair); return `Team ${a} or team ${b}, and why?`; } },
+  { cats: ["This or That","Family Stories"], make: () => { const [a, b] = pick(G.pair); return `Would your family pick ${a} or ${b}?`; } },
+  { cats: ["This or That","Food & Feast"], make: () => { const [a, b] = two(G.food); return `${a[0].toUpperCase()}${a.slice(1)} or ${b}?`; } },
+  { cats: ["This or That","Dream Big"], make: () => { const [a, b] = two(G.dest); return `A trip to ${a} or ${b}?`; } },
+  { cats: ["Dream Big"], make: () => `If you could fly to ${pick(G.dest)} tomorrow, what's the first thing you'd do?` },
+  { cats: ["Dream Big","Family Stories"], make: () => `If you won a trip to ${pick(G.dest)}, which two people here would you bring?` },
+  { cats: ["Dream Big","Kids' Corner"], make: () => `If you could learn to ${pick(G.talent)} overnight, what would you do first?` },
+  { cats: ["Dream Big","Would You Rather"], make: () => { const [a, b] = two(G.talent); return `Would you rather learn to ${a} or ${b}?`; } },
+  { cats: ["Dream Big"], make: () => `What would a perfect day in ${pick(G.dest)} look like?` },
 ];
 function generate() {
   const pool = TEMPLATES.filter(t => t.cats.some(c => active.has(c)));
@@ -284,6 +369,7 @@ const chips = $("chips");
 const STYLE = {
   "Silly & Fun": ["--lavender", "🤪"], "Food & Feast": ["--butter", "🍕"], "Would You Rather": ["--mint", "🤔"],
   "Family Stories": ["--blush", "🏡"], "Thankful": ["--rose", "💛"], "Holidays": ["--sage", "🎉"], "Kids' Corner": ["--sky", "🧸"],
+  "This or That": ["--peach", "⚖️"], "Dream Big": ["--aqua", "🌍"],
 };
 const styleOf = c => STYLE[c] || ["--surface", "💬"];
 
